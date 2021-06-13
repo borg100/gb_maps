@@ -1,5 +1,4 @@
 #include <gb/gb.h>
-#include <stdint.h>
 
 #include "submap.h"
 
@@ -16,7 +15,7 @@ void main()
 {
     DISPLAY_OFF;
 
-    set_level(BKG_OVERWORLD_MAP_WIDTH, BKG_OVERWORLD_MAP_HEIGHT, bkg_overworld_tiles, bkg_overworld_map);
+    set_level(BKG_OVERWORLD_MAP_WIDTH, BKG_OVERWORLD_MAP_HEIGHT, bkg_overworld_tiles, bkg_overworld_map, 137u, 248u);
 
     DISPLAY_ON;
 
@@ -57,11 +56,15 @@ void main()
         }
         else if (joy & J_SELECT)
         {
-            set_level(BKG_OVERWORLD_MAP_WIDTH, BKG_OVERWORLD_MAP_HEIGHT, bkg_overworld_tiles, bkg_overworld_map);
+            set_level(BKG_OVERWORLD_MAP_WIDTH, BKG_OVERWORLD_MAP_HEIGHT, bkg_overworld_tiles, bkg_overworld_map, 0, 0);
         }
         else if (joy & J_START)
         {
-            set_level(BKG_APARTMENT_SCROLL_MAP_WIDTH, BKG_APARTMENT_SCROLL_MAP_HEIGHT, bkg_apartment_scroll_tiles, bkg_apartment_scroll_map);
+            set_level(BKG_APARTMENT_SCROLL_MAP_WIDTH, BKG_APARTMENT_SCROLL_MAP_HEIGHT, bkg_apartment_scroll_tiles, bkg_apartment_scroll_map, 0, 0);
+        }
+        else if (joy & J_A)
+        {
+            show_position();
         }
         if (redraw)
         {

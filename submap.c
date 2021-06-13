@@ -1,5 +1,5 @@
 #include <gb/gb.h>
-#include <stdint.h>
+#include <stdio.h>
 
 #define MIN(A, B) ((A) < (B) ? (A) : (B))
 
@@ -8,12 +8,19 @@ const UINT8 *level_map;
 UINT8 level_map_width, level_map_height;
 
 UINT16 camera_max_x, camera_max_y;
+
 // current and old positions of the camera in pixels
 UINT16 camera_x, camera_y, old_camera_x, old_camera_y;
+
 // current and old position of the map in tiles
 UINT8 map_pos_x, map_pos_y, old_map_pos_x, old_map_pos_y;
 
-void set_level(UINT8 map_width, UINT8 map_height, const UINT8 *map_tiles, const UINT8 *map)
+void show_position()
+{
+    printf("x: %u\ny: %u\n", camera_x, camera_y);
+}
+
+void set_level(UINT8 map_width, UINT8 map_height, const UINT8 *map_tiles, const UINT8 *map, UINT16 start_camera_x, UINT16 start_camera_y)
 {
     HIDE_BKG;
 
@@ -24,15 +31,17 @@ void set_level(UINT8 map_width, UINT8 map_height, const UINT8 *map_tiles, const 
     camera_max_x = (level_map_width - 20) * 8;
     camera_max_y = (level_map_height - 18) * 8;
 
-    set_bkg_data(0, 255u, map_tiles);
-
-    map_pos_x = map_pos_y = 0;
-    old_map_pos_x = old_map_pos_y = 255;
-    set_bkg_submap(map_pos_x, map_pos_y, 20, 18, level_map, level_map_width);
-
-    camera_x = camera_y = 0;
+    camera_x = start_camera_x;
+    camera_y = start_camera_y;
     old_camera_x = camera_x;
     old_camera_y = camera_y;
+
+    map_pos_x = (UINT8)(camera_x >> 3u);
+    map_pos_y = (UINT8)(camera_y >> 3u);
+    old_map_pos_x = old_map_pos_y = 255;
+
+    set_bkg_data(0, 255u, map_tiles);
+    set_bkg_submap(map_pos_x, map_pos_y, 20, 18, level_map, level_map_width);
 
     SCX_REG = camera_x;
     SCY_REG = camera_y;
