@@ -1,7 +1,7 @@
 #include <gb/gb.h>
 
-#include "bigmap_map.h"
-#include "bigmap_tiles.h"
+#include "maps/bigmap_map.h"
+#include "maps/bigmap_tiles.h"
 
 #define camera_max_y ((bigmap_mapHeight - 18) * 8)
 #define camera_max_x ((bigmap_mapWidth - 20) * 8)
