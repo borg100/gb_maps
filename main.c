@@ -61,6 +61,7 @@ void main()
         else if (joy & J_START)
         {
             set_level(BKG_APARTMENT_SCROLL_MAP_WIDTH, BKG_APARTMENT_SCROLL_MAP_HEIGHT, bkg_apartment_scroll_tiles, bkg_apartment_scroll_map, 0, 0);
+            disable_camera_x();
         }
         else if (joy & J_A)
         {

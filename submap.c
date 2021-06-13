@@ -20,6 +20,16 @@ void show_position()
     printf("x: %u\ny: %u\n", camera_x, camera_y);
 }
 
+void disable_camera_x()
+{
+    camera_max_x = 0;
+}
+
+void disable_camera_y()
+{
+    camera_max_y = 0;
+}
+
 void set_level(UINT8 map_width, UINT8 map_height, const UINT8 *map_tiles, const UINT8 *map, UINT16 start_camera_x, UINT16 start_camera_y)
 {
     HIDE_BKG;
